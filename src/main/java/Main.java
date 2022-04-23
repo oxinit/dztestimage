@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         chromedriver().setup();
         WebDriver iniDriver =new ChromeDriver();
- ;
         iniDriver.manage().window().maximize();
         iniDriver.get("https://www.google.com");
         iniDriver.findElement(By.name("q")).sendKeys("cheese"+Keys.ENTER);
@@ -22,7 +21,8 @@ public class Main {
             FileUtils.copyFile(scrFile, new File("c:\\temp\\screenshot.png"));
             iniDriver.close();
         }
-        else throw new IOException("element nod displayed");
-        iniDriver.close();
+        else {iniDriver.close();
+              throw new IOException("element nod displayed");
+        }
     }
 }
