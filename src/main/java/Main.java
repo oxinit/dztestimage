@@ -10,21 +10,17 @@ import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        chromedriver().setup();//before chromeDriver musthave
+        chromedriver().setup();
         WebDriver iniDriver =new ChromeDriver();
  ;
         iniDriver.manage().window().maximize();
-        iniDriver.get("https://www.google.com");//prestep
-        iniDriver.findElement(By.name("q")).sendKeys("cheese"+Keys.ENTER);//action1
-        iniDriver.findElement(By.xpath("//a[contains(@data-hveid,\"CAMQA\")]")).click();//action2
+        iniDriver.get("https://www.google.com");
+        iniDriver.findElement(By.name("q")).sendKeys("cheese"+Keys.ENTER);
+        iniDriver.findElement(By.xpath("//a[contains(@data-hveid,\"CAMQA\")]")).click();
         if(iniDriver.findElement(By.xpath("//img[contains(@src,'jpeg')][contains(@alt,'Cheese Kiev')]")).isDisplayed()) {
-            //  TakesScreenshot scrShot =((TakesScreenshot)iniDriver);step1
-            //  File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);step2
-            //  File destFile= new File("/c:testCheese.png");//step3
-            //  FileUtils.copyFile(SrcFile, destFile);/step4
-            File scrFile = ((TakesScreenshot) iniDriver).getScreenshotAs(OutputType.FILE);//step1+2
-            FileUtils.copyFile(scrFile, new File("c:\\temp\\screenshot.png"));//step3+4 path cant be in c root needs folder
-            iniDriver.close();//teardown
+            File scrFile = ((TakesScreenshot) iniDriver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File("c:\\temp\\screenshot.png"));
+            iniDriver.close();
         }
         else throw new IOException("element nod displayed");
         iniDriver.close();
